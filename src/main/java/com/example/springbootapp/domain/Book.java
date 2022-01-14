@@ -1,6 +1,7 @@
 package com.example.springbootapp.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -15,6 +16,7 @@ import java.util.List;
 @Table (name = "BOOKS")
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class Book {
 
     @Id

@@ -1,5 +1,6 @@
 package com.example.springbootapp.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -9,6 +10,7 @@ import javax.persistence.*;
 @Table(name = "REWARDS")
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class Reward {
 
     @Id
