@@ -1,10 +1,16 @@
 package com.example.springbootapp.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
-import java.util.Date;
+import java.util.*;
 
 @Entity
 @Table(name = "AUTHORS")
+@Data
+@NoArgsConstructor
 public class Author {
 
     @Id
@@ -20,43 +26,17 @@ public class Author {
     @Column(name = "AUTHOR_SEX")
     private String sex;
 
-    public Integer getId() {
-        return id;
-    }
+    @JsonIgnore
+    @OneToMany( fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<Book> books = new ArrayList<>();
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+    @JsonIgnore
+    @OneToMany (mappedBy = "author", cascade =  CascadeType.ALL)
+    private List <Reward> rewards = new ArrayList<>();
 
-    public String getFirstName() {
-        return firstName;
-    }
+    @JsonIgnore
+    @ManyToOne (fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Publisher publisher;
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
 
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public Date getBirthDate() {
-        return birthDate;
-    }
-
-    public void setBirthDate(Date birthDate) {
-        this.birthDate = birthDate;
-    }
-
-    public String getSex() {
-        return sex;
-    }
-
-    public void setSex(String sex) {
-        this.sex = sex;
-    }
 }
