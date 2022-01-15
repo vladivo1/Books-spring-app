@@ -24,17 +24,17 @@ public class Reward {
     @Column(name = "REWARD_YEAR")
     private Integer year;
 
-    @JsonIgnore
+
     @ManyToOne( cascade = CascadeType.ALL)
     @JoinColumn(name = "publisher_id")
     private Publisher publisher;
 
-    @JsonIgnore
+
     @ManyToOne( cascade = CascadeType.ALL)
     @JoinColumn(name = "book_id")
     private Book book;
 
-    @JsonIgnore
+
     @ManyToOne( cascade = CascadeType.ALL)
     @JoinColumn(name = "author_id")
     private Author author;

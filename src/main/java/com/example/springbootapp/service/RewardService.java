@@ -10,6 +10,7 @@ import com.example.springbootapp.repository.PublisherRepository;
 import com.example.springbootapp.repository.RewardRepository;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
 @Service
@@ -45,36 +46,40 @@ public class RewardService {
 
     }
 
-    public Reward updateReward (Reward reward) {
-        Reward updatedReward = rewardRepository.findById(reward.getId()).orElse(null);
-        updatedReward.setTitle(reward.getTitle());
-        updatedReward.setYear(reward.getYear());
-        return rewardRepository.save(updatedReward);
+    public Reward updateReward (Integer id, Reward reward) {
+        return rewardRepository.findById(id)
+                .map (entity -> {
+                    entity.setTitle(reward.getTitle());
+                    entity.setYear(reward.getYear());
+                    return rewardRepository.save(entity);
+                })
+                .orElseThrow(() -> new EntityNotFoundException("Reward not found with id = " + id));
     }
+
 
     public String deleteReward(int id) {
         rewardRepository.deleteById(id);
         return "Reward with " + id + " was deleted";
     }
 
-    public Reward addRewardToAuthor(int authorId, int rewardId) {
+    public Reward addAuthorToReward(int authorId, int rewardId) {
         Reward reward = rewardRepository.findById(rewardId).orElse(null);
         Author author = authorRepository.findById(authorId).orElse(null);
-        reward.assignAuthor(author);
+        reward.setAuthor(author);
         return rewardRepository.save(reward);
     }
 
-    public Reward addRewardToBook(int bookId, int rewardId) {
+    public Reward addBookToReward(int bookId, int rewardId) {
         Reward reward = rewardRepository.findById(rewardId).orElse(null);
         Book book = bookRepository.findById(bookId).orElse(null);
-        reward.assignBook(book);
+        reward.setBook(book);
         return rewardRepository.save(reward);
     }
 
-    public Reward addRewardToPublisher(int publisherId, int rewardId) {
+    public Reward addPublisherToReward(int publisherId, int rewardId) {
         Reward reward = rewardRepository.findById(rewardId).orElse(null);
         Publisher publisher = publisherRepository.findById(publisherId).orElse(null);
-        reward.assignPublisher(publisher);
+        reward.setPublisher(publisher);
         return rewardRepository.save(reward);
 
     }

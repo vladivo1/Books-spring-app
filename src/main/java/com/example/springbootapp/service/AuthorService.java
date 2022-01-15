@@ -29,21 +29,20 @@ public class AuthorService {
         return authorRepository.findAll();
     }
 
-    public Author addBook(int id, Book book) {
+    public Author addBook(Integer id, Book book) {
         Author author = authorRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Author with id " + id + "not found"));
         author.getBooks().add(book);
-        book.assignAuthor(author);
         return authorRepository.save(author);
     }
 
-    public Author getAuthorById(int id) {
+    public Author getAuthorById(Integer id) {
         return authorRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Author with id " + id + "not found"));
     }
 
-    public Author updateAuthor(int id, Author author) {
-        authorRepository.findById(id)
+    public Author updateAuthor(Integer id, Author author) {
+        return authorRepository.findById(id)
                 .map(entity -> {
                     entity.setFirstName(author.getFirstName());
                     entity.setLastName(author.getLastName());
@@ -52,10 +51,9 @@ public class AuthorService {
                     return authorRepository.save(entity);
                 })
                 .orElseThrow(() -> new EntityNotFoundException("Author not found with id = " + id));
-        return author;
     }
 
-     public String deleteAuthor(int id) {
+     public String deleteAuthor(Integer id) {
         authorRepository.deleteById(id);
         return "Author with id + " + id + "was deleted";
     }

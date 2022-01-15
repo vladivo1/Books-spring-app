@@ -27,7 +27,7 @@ public class Author {
     @Column(name = "AUTHOR_SEX")
     private String sex;
 
-    
+
     @OneToMany( fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Book> books = new ArrayList<>();
 
@@ -35,9 +35,9 @@ public class Author {
     @OneToMany (mappedBy = "author", cascade =  CascadeType.ALL)
     private List <Reward> rewards = new ArrayList<>();
 
-    @JsonIgnore
     @ManyToOne (fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Publisher publisher;
+
 
 
 }

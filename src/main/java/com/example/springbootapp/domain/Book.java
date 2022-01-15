@@ -30,7 +30,7 @@ public class Book {
     @Column(name = "BOOK_ISBN")
     private String isbn;
 
-    @JsonIgnore
+
     @ManyToOne( cascade = CascadeType.ALL)
     @JoinColumn(name = "author_id")
     private Author author;
@@ -39,16 +39,8 @@ public class Book {
     @JoinColumn(name = "publisher_id")
     private Publisher publisher;
 
-    @JsonIgnore
+
     @OneToMany( fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Reward> rewards = new ArrayList<>();
-
-    public void assignAuthor(Author author) {
-        this.author = author;
-    }
-
-    public void assignPublisher(Publisher publisher) {
-        this.publisher = publisher;
-    }
 
 }

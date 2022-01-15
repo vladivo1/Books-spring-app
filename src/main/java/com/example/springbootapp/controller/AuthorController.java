@@ -24,11 +24,13 @@ public class AuthorController {
     public Author saveAuthor(@RequestBody Author author) {
         return authorService.saveAuthor(author);
     }
+
     @PostMapping("/authors")
     @ResponseStatus(HttpStatus.CREATED)
     public List<Author> saveAuthors (@RequestBody List<Author> authors) {
         return authorService.saveAuthors(authors);
     }
+
     @PostMapping("/author/{id}/book")
         @ResponseStatus(HttpStatus.CREATED)
         public Author addBook (@PathVariable ("id") Integer id, @RequestBody Book book) {
