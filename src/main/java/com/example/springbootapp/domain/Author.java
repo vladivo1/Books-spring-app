@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
 import java.util.*;
 
@@ -16,7 +15,7 @@ import java.util.*;
 public class Author {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "author_id", insertable = false, updatable = false)
     private Integer id;
     @Column(name = "AUTHOR_FIRST_NAME")
@@ -28,7 +27,7 @@ public class Author {
     @Column(name = "AUTHOR_SEX")
     private String sex;
 
-    @JsonIgnore
+    
     @OneToMany( fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Book> books = new ArrayList<>();
 

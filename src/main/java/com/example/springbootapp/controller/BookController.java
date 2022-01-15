@@ -18,19 +18,19 @@ public class BookController {
         this.bookRepository = bookRepository;
     }
 
-    @PostMapping("/saveBook")
+    @PostMapping("/book")
     @ResponseStatus(HttpStatus.CREATED)
     public Book saveBook(@RequestBody Book book) {
         return bookRepository.save(book);
     }
 
-    @GetMapping("/getAllBooks")
+    @GetMapping("/books")
     @ResponseStatus(HttpStatus.OK)
     public List<Book> getAllBooks() {
         return bookRepository.findAll();
     }
 
-    @GetMapping("/getBookById/{id}")
+    @GetMapping("/book/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Book getBookById(@PathVariable Integer id) {
         Book book = bookRepository.findById(id)
@@ -38,7 +38,7 @@ public class BookController {
         return book;
     }
 
-    @PutMapping("/updateBook/{id}")
+    @PutMapping("/book/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Book updateBook(@PathVariable("id") Integer id, @RequestBody Book book) {
 
@@ -51,7 +51,7 @@ public class BookController {
                 .orElseThrow(() -> new EntityNotFoundException("Book not found with id = " + id));
     }
 
-    @DeleteMapping("/deleteBook/{id}")
+    @DeleteMapping("/book/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteBook(@PathVariable Integer id) {
         Book book = bookRepository.findById(id)
@@ -59,7 +59,7 @@ public class BookController {
         bookRepository.delete(book);
     }
 
-    @DeleteMapping("/deleteAllBooks")
+    @DeleteMapping("/books")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteAllBooks(){
         bookRepository.deleteAll();

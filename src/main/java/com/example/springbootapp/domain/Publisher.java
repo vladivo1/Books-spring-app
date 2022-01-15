@@ -20,6 +20,7 @@ public class Publisher {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
+    private String country;
     private String address;
 
     @JsonIgnore

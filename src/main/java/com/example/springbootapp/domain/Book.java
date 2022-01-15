@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-
 @Entity
 @Table (name = "BOOKS")
 @Data
@@ -36,8 +35,20 @@ public class Book {
     @JoinColumn(name = "author_id")
     private Author author;
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "publisher_id")
+    private Publisher publisher;
+
     @JsonIgnore
     @OneToMany( fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Reward> rewards = new ArrayList<>();
+
+    public void assignAuthor(Author author) {
+        this.author = author;
+    }
+
+    public void assignPublisher(Publisher publisher) {
+        this.publisher = publisher;
+    }
 
 }

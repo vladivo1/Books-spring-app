@@ -19,19 +19,19 @@ public class RewardController {
     }
 
 
-    @PostMapping("/saveReward")
+    @PostMapping("/reward")
     @ResponseStatus(HttpStatus.CREATED)
     public Reward saveReward(@RequestBody Reward reward) {
         return rewardRepository.save(reward);
     }
 
-    @GetMapping("/getAllRewards")
+    @GetMapping("/rewards")
     @ResponseStatus(HttpStatus.OK)
     public List<Reward> getAllRewards() {
         return rewardRepository.findAll();
     }
 
-    @GetMapping("/getRewardById/{id}")
+    @GetMapping("/reward/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Reward getRewardById(@PathVariable Integer id) {
         Reward reward = rewardRepository.findById(id)
@@ -39,7 +39,7 @@ public class RewardController {
         return reward;
     }
 
-    @PutMapping("/updateReward/{id}")
+    @PutMapping("/reward/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Reward updateReward(@PathVariable("id") Integer id, @RequestBody Reward reward) {
 
@@ -52,7 +52,7 @@ public class RewardController {
                 .orElseThrow(() -> new EntityNotFoundException("Reward not found with id = " + id));
     }
 
-    @DeleteMapping("/deleteReward/{id}")
+    @DeleteMapping("/reward/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteReward(@PathVariable Integer id) {
         Reward reward = rewardRepository.findById(id)
@@ -60,7 +60,7 @@ public class RewardController {
         rewardRepository.delete(reward);
     }
 
-    @DeleteMapping("/deleteAllRewards")
+    @DeleteMapping("/rewards")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteAllAuthors(){
         rewardRepository.deleteAll();
