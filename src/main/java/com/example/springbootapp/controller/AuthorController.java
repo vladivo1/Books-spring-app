@@ -2,68 +2,65 @@ package com.example.springbootapp.controller;
 
 
 import com.example.springbootapp.domain.Author;
-import com.example.springbootapp.repository.AuthorRepository;
+import com.example.springbootapp.domain.Book;
+import com.example.springbootapp.service.AuthorService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
-import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api", produces = MediaType.APPLICATION_JSON_VALUE)
 public class AuthorController {
 
-    private final AuthorRepository authorRepository;
-    public AuthorController (AuthorRepository authorRepository) {
-        this.authorRepository = authorRepository;
+    private final AuthorService authorService;
+    public AuthorController (AuthorService authorService) {
+        this.authorService = authorService;
+
     }
 
-    @PostMapping("/saveAuthor")
+    @PostMapping("/author")
     @ResponseStatus(HttpStatus.CREATED)
     public Author saveAuthor(@RequestBody Author author) {
-        return authorRepository.save(author);
+        return authorService.saveAuthor(author);
     }
 
-    @GetMapping("/getAllAuthors")
+    @PostMapping("/authors")
+    @ResponseStatus(HttpStatus.CREATED)
+    public List<Author> saveAuthors (@RequestBody List<Author> authors) {
+        return authorService.saveAuthors(authors);
+    }
+
+    @PostMapping("/author/{id}/book")
+        @ResponseStatus(HttpStatus.CREATED)
+        public Author addBook (@PathVariable ("id") Integer id, @RequestBody Book book) {
+            return authorService.addBook(id,book);
+    }
+
+    @GetMapping("/authors")
     @ResponseStatus(HttpStatus.OK)
     public List <Author> getAllAuthors() {
-        return authorRepository.findAll();
+        return authorService.getAllAuthors();
     }
 
-    @GetMapping("/getAuthorById/{id}")
+    @GetMapping("/author/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Author getAuthorById(@PathVariable Integer id) {
-        Author author = authorRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Author with id" + id + "not found"));
-        return author;
+      return authorService.getAuthorById(id);
     }
 
-    @PutMapping("/updateAuthor/{id}")
+    @PutMapping  ("/author/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Author updateAuthor(@PathVariable("id") Integer id, @RequestBody Author author) {
-
-        return authorRepository.findById(id)
-                .map (entity -> {
-                    entity.setFirstName(author.getFirstName());
-                    entity.setLastName(author.getLastName());
-                    entity.setBirthDate(author.getBirthDate());
-                    entity.setSex(author.getSex());
-                    return authorRepository.save(entity);
-                })
-                .orElseThrow(() -> new EntityNotFoundException("Author not found with id = " + id));
+         return authorService.updateAuthor(id, author);
     }
 
-    @DeleteMapping("/deleteAuthor/{id}")
+    @DeleteMapping("/author/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteAuthor(@PathVariable Integer id) {
-        Author author = authorRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Author with id" + id + "not found"));
-        authorRepository.delete(author);
+    public String deleteAuthor(@PathVariable Integer id) {
+        return authorService.deleteAuthor(id);
+
+
     }
 
-    @DeleteMapping("/deleteAllAuthors")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteAllAuthors(){
-        authorRepository.deleteAll();
-    }
 }

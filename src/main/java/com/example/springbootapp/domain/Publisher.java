@@ -20,13 +20,16 @@ public class Publisher {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
+    private String country;
     private String address;
 
-    @JsonIgnore
+
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Author> authorList = new ArrayList<>();
 
-    @JsonIgnore
+    @OneToMany (fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private  List<Book> bookList = new ArrayList<>();
+
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Reward> rewardList = new ArrayList<>();
 
