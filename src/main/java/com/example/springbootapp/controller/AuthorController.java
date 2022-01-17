@@ -48,6 +48,11 @@ public class AuthorController {
     public Author getAuthorById(@PathVariable Integer id) {
       return authorService.getAuthorById(id);
     }
+    @GetMapping("/author/birthday/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public String getAuthorBirthdayById(@PathVariable Integer id) {
+        return authorService.getAuthorDateOfBirthdayById(id);
+    }
 
     @PutMapping  ("/author/{id}")
     @ResponseStatus(HttpStatus.OK)
