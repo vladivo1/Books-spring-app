@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface AuthorRepository  extends JpaRepository<Author, Integer> {
 
-    @Query (value = "SELECT a.birthDate" +
+    @Query (value = "SELECT a.firstName, a.lastName, a.birthDate" +
             " FROM Author a WHERE a.id = ?1")
-     String findAuthorDateOfBirthById (int id);
+     String findAuthorAndDateOfBirthById (int id);
 }

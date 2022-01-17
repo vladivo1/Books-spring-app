@@ -42,8 +42,8 @@ public class AuthorService {
                 .orElseThrow(() -> new EntityNotFoundException("Author with id " + id + "not found"));
     }
 
-    public String getAuthorDateOfBirthdayById(Integer id) {
-        return authorRepository.findAuthorDateOfBirthById(id);
+    public String getAuthorAndDateOfBirthdayById(Integer id) {
+        return authorRepository.findAuthorAndDateOfBirthById(id);
     }
 
     public Author updateAuthor(Integer id, Author author) {
