@@ -31,7 +31,7 @@ public class Book {
     private String isbn;
 
 
-    @ManyToOne( cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "author_id")
     private Author author;
 

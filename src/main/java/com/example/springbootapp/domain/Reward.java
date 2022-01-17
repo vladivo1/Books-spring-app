@@ -39,16 +39,5 @@ public class Reward {
     @JoinColumn(name = "author_id")
     private Author author;
 
-    public void assignAuthor(Author author) {
-        this.author = author;
-    }
-
-    public void assignBook(Book book) {
-        this.book = book;
-    }
-
-    public void assignPublisher(Publisher publisher) {
-        this.publisher = publisher;
-    }
 
 }

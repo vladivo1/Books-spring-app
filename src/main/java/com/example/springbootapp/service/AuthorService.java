@@ -33,6 +33,7 @@ public class AuthorService {
         Author author = authorRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Author with id " + id + "not found"));
         author.getBooks().add(book);
+//        book.setAuthor(author);
         return authorRepository.save(author);
     }
 

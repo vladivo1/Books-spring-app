@@ -65,6 +65,7 @@ public class BookService {
         Book book = bookRepository.findById(bookId).orElse(null);
         Author author = authorRepository.findById(authorId).orElse(null);
         book.setAuthor(author);
+//        author.getBooks().add(book);
         return bookRepository.save(book);
     }
 

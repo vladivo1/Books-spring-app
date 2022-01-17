@@ -32,7 +32,7 @@ public class Author {
     private List<Book> books = new ArrayList<>();
 
     @JsonIgnore
-    @OneToMany (mappedBy = "author", cascade =  CascadeType.ALL)
+    @OneToMany (fetch = FetchType.EAGER, cascade =  CascadeType.ALL)
     private List <Reward> rewards = new ArrayList<>();
 
     @ManyToOne (fetch = FetchType.EAGER, cascade = CascadeType.ALL)
