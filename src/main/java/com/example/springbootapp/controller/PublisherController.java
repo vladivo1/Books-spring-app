@@ -29,23 +29,23 @@ public class PublisherController {
         return publisherService.saveAllPublishers(publishers);
     }
 
-    @PostMapping("/publisher/{publisher_id}/author/{author_id}")
-    @ResponseStatus(HttpStatus.CREATED)
-    public Publisher addAuthorToPublisher(@PathVariable Integer publisher_id,@PathVariable Integer author_id) {
-        return publisherService.addAuthorToPublisher(publisher_id,author_id);
-    }
-
-    @PostMapping("/publisher/{publisher_id}/book/{book_id}")
-    @ResponseStatus(HttpStatus.CREATED)
-    public Publisher addBookToPublisher(@PathVariable Integer publisher_id,@PathVariable Integer book_id) {
-        return publisherService.addBookToPublisher(publisher_id,book_id);
-    }
-
-    @PostMapping("/publisher/{publisher_id}/reward/{reward_id}")
-    @ResponseStatus(HttpStatus.CREATED)
-    public Publisher addRewardToPublisher(@PathVariable Integer publisher_id,@PathVariable Integer reward_id) {
-        return publisherService.addRewardToPublisher(publisher_id,reward_id);
-    }
+//    @PostMapping("/publisher/{publisher_id}/author/{author_id}")
+//    @ResponseStatus(HttpStatus.CREATED)
+//    public Publisher addAuthorToPublisher(@PathVariable Integer publisher_id,@PathVariable Integer author_id) {
+//        return publisherService.addAuthorToPublisher(publisher_id,author_id);
+//    }
+//
+//    @PostMapping("/publisher/{publisher_id}/book/{book_id}")
+//    @ResponseStatus(HttpStatus.CREATED)
+//    public Publisher addBookToPublisher(@PathVariable Integer publisher_id,@PathVariable Integer book_id) {
+//        return publisherService.addBookToPublisher(publisher_id,book_id);
+//    }
+//
+//    @PostMapping("/publisher/{publisher_id}/reward/{reward_id}")
+//    @ResponseStatus(HttpStatus.CREATED)
+//    public Publisher addRewardToPublisher(@PathVariable Integer publisher_id,@PathVariable Integer reward_id) {
+//        return publisherService.addRewardToPublisher(publisher_id,reward_id);
+//    }
 
     @GetMapping("/publisher")
     @ResponseStatus(HttpStatus.OK)

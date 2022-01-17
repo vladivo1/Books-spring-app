@@ -26,23 +26,23 @@ public class RewardController {
     public List <Reward> saveAllRewards (@RequestBody List <Reward> rewards) {
         return rewardService.saveAllRewards(rewards);
     }
-    @PostMapping("/reward/{reward_id}/author/{author_id}")
-    @ResponseStatus(HttpStatus.CREATED)
-    public Reward addAuthorToReward (@PathVariable Integer reward_id, @PathVariable Integer author_id) {
-        return rewardService.addAuthorToReward(author_id,reward_id);
-    }
-
-    @PostMapping("/reward/{reward_id}/book/{book_id}")
-    @ResponseStatus(HttpStatus.CREATED)
-    public Reward addBookToReward (@PathVariable Integer reward_id, @PathVariable Integer book_id) {
-        return rewardService.addBookToReward(book_id,reward_id);
-    }
-
-    @PostMapping("/reward/{reward_id}/publisher/{publisher_id}")
-    @ResponseStatus(HttpStatus.CREATED)
-    public Reward addPublisherToReward (@PathVariable Integer reward_id, @PathVariable Integer publisher_id) {
-        return rewardService.addPublisherToReward(publisher_id,reward_id);
-    }
+//    @PostMapping("/reward/{reward_id}/author/{author_id}")
+//    @ResponseStatus(HttpStatus.CREATED)
+//    public Reward addAuthorToReward (@PathVariable Integer reward_id, @PathVariable Integer author_id) {
+//        return rewardService.addAuthorToReward(author_id,reward_id);
+//    }
+//
+//    @PostMapping("/reward/{reward_id}/book/{book_id}")
+//    @ResponseStatus(HttpStatus.CREATED)
+//    public Reward addBookToReward (@PathVariable Integer reward_id, @PathVariable Integer book_id) {
+//        return rewardService.addBookToReward(book_id,reward_id);
+//    }
+//
+//    @PostMapping("/reward/{reward_id}/publisher/{publisher_id}")
+//    @ResponseStatus(HttpStatus.CREATED)
+//    public Reward addPublisherToReward (@PathVariable Integer reward_id, @PathVariable Integer publisher_id) {
+//        return rewardService.addPublisherToReward(publisher_id,reward_id);
+//    }
 
     @GetMapping("/rewards")
     @ResponseStatus(HttpStatus.OK)

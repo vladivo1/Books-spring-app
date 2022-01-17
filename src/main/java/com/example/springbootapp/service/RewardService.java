@@ -62,25 +62,25 @@ public class RewardService {
         return "Reward with " + id + " was deleted";
     }
 
-    public Reward addAuthorToReward(int authorId, int rewardId) {
-        Reward reward = rewardRepository.findById(rewardId).orElse(null);
-        Author author = authorRepository.findById(authorId).orElse(null);
-        reward.setAuthor(author);
-        return rewardRepository.save(reward);
-    }
-
-    public Reward addBookToReward(int bookId, int rewardId) {
-        Reward reward = rewardRepository.findById(rewardId).orElse(null);
-        Book book = bookRepository.findById(bookId).orElse(null);
-        reward.setBook(book);
-        return rewardRepository.save(reward);
-    }
-
-    public Reward addPublisherToReward(int publisherId, int rewardId) {
-        Reward reward = rewardRepository.findById(rewardId).orElse(null);
-        Publisher publisher = publisherRepository.findById(publisherId).orElse(null);
-        reward.setPublisher(publisher);
-        return rewardRepository.save(reward);
-
-    }
+//    public Reward addAuthorToReward(int authorId, int rewardId) {
+//        Reward reward = rewardRepository.findById(rewardId).orElse(null);
+//        Author author = authorRepository.findById(authorId).orElse(null);
+//        reward.setAuthor(author);
+//        return rewardRepository.save(reward);
+//    }
+//
+//    public Reward addBookToReward(int bookId, int rewardId) {
+//        Reward reward = rewardRepository.findById(rewardId).orElse(null);
+//        Book book = bookRepository.findById(bookId).orElse(null);
+//        reward.setBook(book);
+//        return rewardRepository.save(reward);
+//    }
+//
+//    public Reward addPublisherToReward(int publisherId, int rewardId) {
+//        Reward reward = rewardRepository.findById(rewardId).orElse(null);
+//        Publisher publisher = publisherRepository.findById(publisherId).orElse(null);
+//        reward.setPublisher(publisher);
+//        return rewardRepository.save(reward);
+//
+//    }
 }
