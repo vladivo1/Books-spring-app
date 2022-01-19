@@ -65,7 +65,6 @@ public class BookService {
         Book book = bookRepository.findById(bookId).orElse(null);
         Author author = authorRepository.findById(authorId).orElse(null);
         book.setAuthor(author);
-//        author.getBooks().add(book);
         return bookRepository.save(book);
     }
 
@@ -73,7 +72,6 @@ public class BookService {
         Book book = bookRepository.findById(bookId).orElse(null);
         Publisher publisher = publisherRepository.findById(publisherId).orElse(null);
         book.setPublisher(publisher);
-//        publisher.getBookList().add(book);
         return bookRepository.save(book);
     }
 
@@ -81,7 +79,6 @@ public class BookService {
         Book book = bookRepository.findById(bookId).orElse(null);
         Reward reward = rewardRepository.findById(rewardId).orElse(null);
         book.getRewards().add(reward);
-//        reward.setBook(book);
         return bookRepository.save(book);
     }
 }

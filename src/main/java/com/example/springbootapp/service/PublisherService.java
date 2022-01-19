@@ -43,7 +43,6 @@ public class PublisherService {
         Author author = authorRepository.findById(author_id)
                 .orElseThrow(() -> new EntityNotFoundException("Author with id " + " not found"));
        publisher.getAuthorList().add(author);
-//       author.setPublisher(publisher);
        return publisherRepository.save(publisher);
     }
 
@@ -53,7 +52,6 @@ public class PublisherService {
         Publisher publisher = publisherRepository.findById(publisher_id)
                 .orElseThrow(() -> new EntityNotFoundException("Author with id " + " not found"));
         publisher.getBookList().add(book);
-//        book.setPublisher(publisher);
         return publisherRepository.save(publisher);
     }
 
@@ -63,7 +61,6 @@ public class PublisherService {
         Publisher publisher = publisherRepository.findById(publisher_id)
                 .orElseThrow(() -> new EntityNotFoundException("Author with id " + " not found"));
         publisher.getRewardList().add(reward);
-//        reward.setPublisher(publisher);
         return publisherRepository.save(publisher);
     }
 

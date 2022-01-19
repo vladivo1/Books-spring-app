@@ -28,13 +28,14 @@ public class Author {
     private String sex;
 
 
+    @JsonIgnore
     @OneToMany( fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Book> books = new ArrayList<>();
 
     @JsonIgnore
     @OneToMany (fetch = FetchType.EAGER, cascade =  CascadeType.ALL)
     private List <Reward> rewards = new ArrayList<>();
-
+    @JsonIgnore
     @ManyToOne (fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Publisher publisher;
 

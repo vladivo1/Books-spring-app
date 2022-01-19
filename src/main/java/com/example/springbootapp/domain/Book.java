@@ -30,16 +30,17 @@ public class Book {
     @Column(name = "BOOK_ISBN")
     private String isbn;
 
-
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "author_id")
     private Author author;
 
+    @JsonIgnore
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "publisher_id")
     private Publisher publisher;
 
-
+    @JsonIgnore
     @OneToMany( fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Reward> rewards = new ArrayList<>();
 

@@ -23,13 +23,15 @@ public class Publisher {
     private String country;
     private String address;
 
-
+    @JsonIgnore
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Author> authorList = new ArrayList<>();
 
+    @JsonIgnore
     @OneToMany (fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private  List<Book> bookList = new ArrayList<>();
 
+    @JsonIgnore
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Reward> rewardList = new ArrayList<>();
 
