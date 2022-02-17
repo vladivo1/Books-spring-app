@@ -16,28 +16,27 @@ import java.util.List;
 public class AuthorController {
 
     private final AuthorService authorService;
-
-    public AuthorController(AuthorService authorService) {
+    public AuthorController (AuthorService authorService) {
         this.authorService = authorService;
 
     }
 
-    @PostMapping
+    @PostMapping()
     public ResponseEntity<Author> saveAuthor(@Valid @RequestBody Author author) {
         authorService.saveAuthor(author);
         return ResponseEntity.status(HttpStatus.CREATED).body(author);
     }
 
     @PostMapping("/list")
-    public ResponseEntity<List<Author>> saveAuthors(@Valid @RequestBody List<Author> authors) {
+    public ResponseEntity<List<Author>> saveAuthors (@Valid @RequestBody List<Author> authors) {
         authorService.saveAuthors(authors);
         return ResponseEntity.status(HttpStatus.CREATED).body(authors);
     }
 
     @PostMapping("/{id}/book")
-    public ResponseEntity<Author> addBook(@PathVariable("id") Integer id, @Valid @RequestBody Book book) {
-        Author author = authorService.addBook(id, book);
-        return ResponseEntity.status(HttpStatus.OK).body(author);
+        public ResponseEntity<Author> addBook (@PathVariable ("id") Integer id, @Valid @RequestBody Book book) {
+            Author author = authorService.addBook(id,book);
+            return ResponseEntity.status(HttpStatus.OK).body(author);
     }
 
     @GetMapping
@@ -47,7 +46,7 @@ public class AuthorController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Author> getAuthorById(@PathVariable Integer id) {
-        return ResponseEntity.status(HttpStatus.OK).body(authorService.getAuthorById(id));
+      return ResponseEntity.status(HttpStatus.OK).body(authorService.getAuthorById(id));
     }
 
     @GetMapping("/birthday/{id}")
@@ -57,12 +56,14 @@ public class AuthorController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Author> updateAuthor(@PathVariable("id") Integer id, @Valid @RequestBody Author author) {
-        return ResponseEntity.status(HttpStatus.OK).body(authorService.updateAuthor(id, author));
+         return ResponseEntity.status(HttpStatus.OK).body(authorService.updateAuthor(id, author));
     }
 
     @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public ResponseEntity<String> deleteAuthor(@PathVariable Integer id) {
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(authorService.deleteAuthor(id));
+        authorService.deleteAuthor(id);
+       return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Author with id " + id + " deleted");
 
     }
 

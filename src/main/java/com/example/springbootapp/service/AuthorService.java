@@ -59,9 +59,9 @@ public class AuthorService {
                 .orElseThrow(() -> new EntityNotFoundException("Author not found with id = " + id));
     }
 
-     public String deleteAuthor(Integer id) {
-        authorRepository.deleteById(id);
-        return "Author with id + " + id + "was deleted";
-    }
+     public Author deleteAuthor(Integer id) {
+          authorRepository.deleteById(id);
+         return null;
+     }
 
 }
