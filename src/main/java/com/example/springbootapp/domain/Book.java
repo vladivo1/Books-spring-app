@@ -27,7 +27,7 @@ public class Book {
     @Size(min = 1, message = "title size must be > 1 characters")
     private String title;
 
-    @Column(name = "isbn", nullable = false)
+    @Column(name = "isbn", nullable = false, unique = true)
     @NotEmpty(message = "isbn cannot be empty")
     @Size(min = 1, message = "isbn size must be > 1 characters")
     private String isbn;

@@ -40,7 +40,7 @@ public class Author {
     @Temporal(TemporalType.DATE)
     private Date birthDate;
 
-    @Column(name = "email", nullable = false)
+    @Column(name = "email", nullable = false, unique = true)
     @NotEmpty
     @Email(message = "email must be correct")
     private String email;
