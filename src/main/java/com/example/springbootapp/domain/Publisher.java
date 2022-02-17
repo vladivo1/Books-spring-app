@@ -1,6 +1,4 @@
 package com.example.springbootapp.domain;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,7 +22,7 @@ public class Publisher {
 
     @Column(name = "name", nullable = false)
     @NotEmpty(message = "name cannot be empty")
-    @Size(min = 1, message = "name size must be > 2 characters")
+    @Size(min = 1, message = "name size must be > 1 characters")
     private String name;
 
     @Column(name = "country", nullable = false)

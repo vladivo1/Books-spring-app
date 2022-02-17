@@ -26,7 +26,7 @@ public class Reward {
     @Column(name = "year", nullable = false)
     @NotEmpty(message = "year cannot be empty")
     @Size(min = 2, message = "year size must be > 2 characters")
-    private Integer year;
+    private String year;
 
     @ManyToOne( cascade = CascadeType.ALL)
     @JoinColumn(name = "publisher_id")
