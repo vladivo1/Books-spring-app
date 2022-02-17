@@ -1,13 +1,13 @@
 package com.example.springbootapp.domain;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 @Entity
-@Table(name = "REWARDS")
+@Table(name = "rewards")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,23 +18,24 @@ public class Reward {
     @Column(name = "reward_id",insertable = false, updatable = false)
     private Integer id;
 
-    @Column(name = "REWARD_NAME", length = 50)
+    @Column(name = "title", nullable = false)
+    @NotEmpty(message = "title cannot be empty")
+    @Size(min = 1, message = "title size must be > 2 characters")
     private String title;
 
-    @Column(name = "REWARD_YEAR")
+    @Column(name = "year", nullable = false)
+    @NotEmpty(message = "year cannot be empty")
+    @Size(min = 2, message = "year size must be > 2 characters")
     private Integer year;
 
-    @JsonIgnore
     @ManyToOne( cascade = CascadeType.ALL)
     @JoinColumn(name = "publisher_id")
     private Publisher publisher;
 
-    @JsonIgnore
     @ManyToOne( cascade = CascadeType.ALL)
     @JoinColumn(name = "book_id")
     private Book book;
 
-    @JsonIgnore
     @ManyToOne( cascade = CascadeType.ALL)
     @JoinColumn(name = "author_id")
     private Author author;

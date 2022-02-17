@@ -1,18 +1,16 @@
 package com.example.springbootapp.domain;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
-
 @Entity
-@Table (name = "BOOKS")
+@Table (name = "books")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -23,25 +21,25 @@ public class Book {
     @Column(name = "book_id", insertable = false, updatable = false)
     private Integer id;
 
-    @Column(name = "BOOK_TITLE")
-    @Size(min = 2, max = 30)
+    @Column(name = "title", nullable = false)
+    @NotEmpty(message = "title cannot be empty")
+    @Size(min = 1, message = "title size must be > 2 characters")
     private String title;
 
-    @Column(name = "BOOK_ISBN")
+    @Column(name = "isbn", nullable = false)
+    @NotEmpty(message = "isbn cannot be empty")
+    @Size(min = 1, message = "isbn size must be > 2 characters")
     private String isbn;
 
-    @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "author_id")
     private Author author;
 
-    @JsonIgnore
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "publisher_id")
     private Publisher publisher;
 
-    @JsonIgnore
-    @OneToMany( fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "book", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Reward> rewards = new ArrayList<>();
 
 }
