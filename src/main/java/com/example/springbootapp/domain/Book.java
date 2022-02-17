@@ -23,12 +23,12 @@ public class Book {
 
     @Column(name = "title", nullable = false)
     @NotEmpty(message = "title cannot be empty")
-    @Size(min = 1, message = "title size must be > 2 characters")
+    @Size(min = 1, message = "title size must be > 1 characters")
     private String title;
 
     @Column(name = "isbn", nullable = false)
     @NotEmpty(message = "isbn cannot be empty")
-    @Size(min = 1, message = "isbn size must be > 2 characters")
+    @Size(min = 1, message = "isbn size must be > 1 characters")
     private String isbn;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
