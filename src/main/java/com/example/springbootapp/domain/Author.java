@@ -42,7 +42,7 @@ public class Author {
 
     @Column(name = "email", nullable = false)
     @NotEmpty
-    @Email( message = "email must be correct")
+    @Email(message = "email must be correct")
     private String email;
 
     @Column(name = "sex", nullable = false)
@@ -52,13 +52,12 @@ public class Author {
     @OneToMany(mappedBy = "author", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Book> books = new ArrayList<>();
 
-    @OneToMany (mappedBy = "author", fetch = FetchType.EAGER, cascade =  CascadeType.ALL)
-    private List <Reward> rewards = new ArrayList<>();
+    @OneToMany(mappedBy = "author", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<Reward> rewards = new ArrayList<>();
 
-    @ManyToOne (fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "publisher_id")
     private Publisher publisher;
-
 
 
 }

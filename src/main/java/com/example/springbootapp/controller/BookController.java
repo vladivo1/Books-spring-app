@@ -15,33 +15,34 @@ import java.util.List;
 public class BookController {
 
     private final BookService bookService;
-    public BookController (BookService bookService) {
+
+    public BookController(BookService bookService) {
         this.bookService = bookService;
     }
 
     @PostMapping
     public ResponseEntity<Book> saveBook(@Valid @RequestBody Book book) {
-        return  ResponseEntity.status(HttpStatus.CREATED).body(bookService.saveBook(book));
+        return ResponseEntity.status(HttpStatus.CREATED).body(bookService.saveBook(book));
     }
 
     @PostMapping("/list")
-    public ResponseEntity<List<Book>> saveBooks( @Valid @RequestBody List<Book> books) {
-        return  ResponseEntity.status(HttpStatus.CREATED).body(bookService.saveBooks(books));
+    public ResponseEntity<List<Book>> saveBooks(@Valid @RequestBody List<Book> books) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(bookService.saveBooks(books));
     }
 
     @PostMapping("/{book_id}/author/{author_id}")
-    public ResponseEntity<Book> addAuthorToBook (@PathVariable int book_id,@PathVariable int author_id) {
-        return  ResponseEntity.status(HttpStatus.CREATED).body(bookService.addAuthorToBook(author_id,book_id));
+    public ResponseEntity<Book> addAuthorToBook(@PathVariable int book_id, @PathVariable int author_id) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(bookService.addAuthorToBook(author_id, book_id));
     }
 
     @PostMapping("/{book_id}/publisher/{publisher_id}")
-    public ResponseEntity<Book> addPublisherToBook (@PathVariable int book_id,@PathVariable int publisher_id) {
+    public ResponseEntity<Book> addPublisherToBook(@PathVariable int book_id, @PathVariable int publisher_id) {
         return ResponseEntity.status(HttpStatus.CREATED).body(bookService.addPublisherToBook(publisher_id, book_id));
     }
 
     @PostMapping("/{book_id}/reward/{reward_id}")
-    public ResponseEntity<Book> addRewardToBook (@PathVariable int book_id,@PathVariable int reward_id) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(bookService.addRewardToBook(reward_id,book_id));
+    public ResponseEntity<Book> addRewardToBook(@PathVariable int book_id, @PathVariable int reward_id) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(bookService.addRewardToBook(reward_id, book_id));
     }
 
     @GetMapping
@@ -51,12 +52,12 @@ public class BookController {
 
     @GetMapping("{id}")
     public ResponseEntity<Book> getBookById(@PathVariable Integer id) {
-      return ResponseEntity.status(HttpStatus.OK).body(bookService.getBookById(id));
+        return ResponseEntity.status(HttpStatus.OK).body(bookService.getBookById(id));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Book> updateBook(@PathVariable("id") Integer id,@Valid @RequestBody Book book) {
-        return ResponseEntity.status(HttpStatus.OK).body(bookService.updateBook(id,book));
+    public ResponseEntity<Book> updateBook(@PathVariable("id") Integer id, @Valid @RequestBody Book book) {
+        return ResponseEntity.status(HttpStatus.OK).body(bookService.updateBook(id, book));
     }
 
     @DeleteMapping("/{id}")

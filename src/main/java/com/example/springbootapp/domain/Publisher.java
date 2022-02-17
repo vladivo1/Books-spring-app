@@ -1,7 +1,9 @@
 package com.example.springbootapp.domain;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
@@ -38,8 +40,8 @@ public class Publisher {
     @OneToMany(mappedBy = "publisher", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Author> authorList = new ArrayList<>();
 
-    @OneToMany ( mappedBy = "publisher", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private  List<Book> bookList = new ArrayList<>();
+    @OneToMany(mappedBy = "publisher", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<Book> bookList = new ArrayList<>();
 
     @OneToMany(mappedBy = "publisher", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Reward> rewardList = new ArrayList<>();

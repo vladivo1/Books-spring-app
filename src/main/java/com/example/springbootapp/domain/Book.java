@@ -1,4 +1,5 @@
 package com.example.springbootapp.domain;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table (name = "books")
+@Table(name = "books")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

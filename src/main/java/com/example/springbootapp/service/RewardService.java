@@ -50,7 +50,7 @@ public class RewardService {
         return rewardRepository.findById(id)
                 .map (entity -> {
                     entity.setTitle(reward.getTitle());
-                    entity.setYear(reward.getYear());
+                    entity.setDate(reward.getDate());
                     return rewardRepository.save(entity);
                 })
                 .orElseThrow(() -> new EntityNotFoundException("Reward not found with id = " + id));
