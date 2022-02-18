@@ -22,7 +22,7 @@ public class AuthorController {
     }
 
     @PostMapping()
-    public ResponseEntity<Author> saveAuthor(@Valid @RequestBody Author author) {
+    public ResponseEntity<Author> saveAuthor(@Valid @RequestBody Author author)  {
         authorService.saveAuthor(author);
         return ResponseEntity.status(HttpStatus.CREATED).body(author);
     }
@@ -60,7 +60,6 @@ public class AuthorController {
     }
 
     @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
     public ResponseEntity<String> deleteAuthor(@PathVariable Integer id) {
         authorService.deleteAuthor(id);
        return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Author with id " + id + " deleted");

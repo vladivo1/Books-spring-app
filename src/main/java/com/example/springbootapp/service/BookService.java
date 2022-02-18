@@ -56,9 +56,8 @@ public class BookService {
                 .orElseThrow(() -> new EntityNotFoundException("Book not found with id = " + id));
     }
 
-    public String deleteBook(Integer id){
+    public void deleteBook(Integer id){
         bookRepository.deleteById(id);
-        return "Book with id " + id + " was deleted";
     }
 
     public Book addAuthorToBook (Integer authorId, Integer bookId) {
