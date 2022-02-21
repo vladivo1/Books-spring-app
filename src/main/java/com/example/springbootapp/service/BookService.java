@@ -71,6 +71,7 @@ public class BookService {
         Book book = bookRepository.findById(bookId).orElse(null);
         Publisher publisher = publisherRepository.findById(publisherId).orElse(null);
         book.setPublisher(publisher);
+        publisher.getBookList().add(book);
         return bookRepository.save(book);
     }
 

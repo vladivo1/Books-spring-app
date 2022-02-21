@@ -28,9 +28,9 @@ public class AuthorController {
     }
 
     @PostMapping("/list")
-    public ResponseEntity<List<Author>> saveAuthors (@Valid @RequestBody List<Author> authors) {
-        authorService.saveAuthors(authors);
-        return ResponseEntity.status(HttpStatus.CREATED).body(authors);
+    public ResponseEntity<List<Author>> saveAuthors (@Valid @RequestBody List<Author> authorList) {
+        authorService.saveAuthors(authorList);
+        return ResponseEntity.status(HttpStatus.CREATED).body(authorList);
     }
 
     @PostMapping("/{id}/book")
