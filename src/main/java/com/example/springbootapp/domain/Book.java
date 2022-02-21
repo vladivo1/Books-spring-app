@@ -1,5 +1,6 @@
 package com.example.springbootapp.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -34,6 +35,7 @@ public class Book {
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "author_id")
+    @JsonBackReference
     private Author author;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
