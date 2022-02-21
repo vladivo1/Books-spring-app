@@ -39,28 +39,31 @@ public class PublisherService {
 
     public Publisher addAuthorToPublisher (Integer author_id, Integer publisher_id) {
          Publisher publisher = publisherRepository.findById(publisher_id)
-                .orElseThrow(() -> new EntityNotFoundException("Publisher with id " + " not found"));
+                .orElseThrow(() -> new EntityNotFoundException("Publisher with id " + publisher_id + " not found"));
         Author author = authorRepository.findById(author_id)
-                .orElseThrow(() -> new EntityNotFoundException("Author with id " + " not found"));
+                .orElseThrow(() -> new EntityNotFoundException("Author with id " + author_id + " not found"));
        publisher.getAuthorList().add(author);
+       author.setPublisher(publisher);
        return publisherRepository.save(publisher);
     }
 
     public Publisher addBookToPublisher (Integer book_id, Integer publisher_id) {
         Book book = bookRepository.findById(book_id)
-                .orElseThrow(() -> new EntityNotFoundException("Publisher with id " + " not found"));
+                .orElseThrow(() -> new EntityNotFoundException("Book with id " + book_id + " not found"));
         Publisher publisher = publisherRepository.findById(publisher_id)
-                .orElseThrow(() -> new EntityNotFoundException("Author with id " + " not found"));
+                .orElseThrow(() -> new EntityNotFoundException("Publisher with id " + publisher_id + " not found"));
         publisher.getBookList().add(book);
+        book.setPublisher(publisher);
         return publisherRepository.save(publisher);
     }
 
     public Publisher addRewardToPublisher (Integer reward_id, Integer publisher_id) {
         Reward reward = rewardRepository.findById(reward_id)
-                .orElseThrow(() -> new EntityNotFoundException("Publisher with id " + " not found"));
+                .orElseThrow(() -> new EntityNotFoundException("Reward with id " + reward_id + " not found"));
         Publisher publisher = publisherRepository.findById(publisher_id)
-                .orElseThrow(() -> new EntityNotFoundException("Author with id " + " not found"));
+                .orElseThrow(() -> new EntityNotFoundException("Publisher with id " + publisher_id + " not found"));
         publisher.getRewardList().add(reward);
+        reward.setPublisher(publisher);
         return publisherRepository.save(publisher);
     }
 
@@ -69,7 +72,8 @@ public class PublisherService {
     }
 
     public Publisher getPublisherById(Integer id) {
-        return publisherRepository.findById(id).orElse(null);
+        return publisherRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Publisher with id " + id + " not found"));
     }
 
     public Publisher updatePublisher(Integer id, Publisher publisher) {
@@ -80,11 +84,14 @@ public class PublisherService {
                     entity.setAddress(publisher.getAddress());
                     return publisherRepository.save(entity);
                 })
-                .orElseThrow(() -> new EntityNotFoundException("Book not found with id = " + id));
+                .orElseThrow(() -> new EntityNotFoundException("Publisher not found with id = " + id));
     }
 
-    public String deletePublisher(Integer id) {
-        publisherRepository.deleteById(id);
-        return "Publisher with id " + id + " was deleted";
+    public void deletePublisher(Integer id) {
+        if ( publisherRepository.findById(id).isPresent())
+            publisherRepository.deleteById(id);
+        else
+            throw new EntityNotFoundException("Publisher not found with id = " + id);
+
     }
 }

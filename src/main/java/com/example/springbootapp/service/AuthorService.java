@@ -17,8 +17,7 @@ public class AuthorService {
     public AuthorService(AuthorRepository authorRepository) {
         this.authorRepository = authorRepository;
     }
-
-
+    
     public void saveAuthor(Author author)  {
         authorRepository.save(author);
     }
@@ -45,7 +44,10 @@ public class AuthorService {
     }
 
     public String getAuthorAndDateOfBirthdayById(Integer id) {
+        if (authorRepository.findById(id).isPresent())
         return authorRepository.findAuthorAndDateOfBirthById(id);
+        else
+            throw new EntityNotFoundException("Author with id" + id + " not found");
     }
 
     public Author updateAuthor(Integer id, Author author) {
@@ -62,7 +64,10 @@ public class AuthorService {
     }
 
      public void deleteAuthor(Integer id) {
+        if (authorRepository.findById(id).isPresent())
           authorRepository.deleteById(id);
+        else
+            throw new EntityNotFoundException("Author not found with id = " + id);
      }
 
 }

@@ -70,7 +70,8 @@ public class PublisherController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deletePublisher(@PathVariable("id") Integer id) {
+        publisherService.deletePublisher(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT)
-                .body(publisherService.deletePublisher(id));
+                .body("Publisher with id " + id + " deleted");
     }
 }

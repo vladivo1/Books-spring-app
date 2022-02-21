@@ -57,28 +57,39 @@ public class BookService {
     }
 
     public void deleteBook(Integer id){
+        if (bookRepository.findById(id).isPresent())
         bookRepository.deleteById(id);
+        else
+           throw new EntityNotFoundException("Book not found with id = " + id);
     }
 
     public Book addAuthorToBook (Integer authorId, Integer bookId) {
-        Book book = bookRepository.findById(bookId).orElse(null);
-        Author author = authorRepository.findById(authorId).orElse(null);
+        Book book = bookRepository.findById(bookId)
+                .orElseThrow(() -> new EntityNotFoundException("Book not found with id = " + bookId));;
+        Author author = authorRepository.findById(authorId)
+                .orElseThrow(() -> new EntityNotFoundException("Author not found with id = " + authorId));;
         book.setAuthor(author);
+        author.getBooks().add(book);
         return bookRepository.save(book);
     }
 
     public Book addPublisherToBook(Integer publisherId, Integer bookId) {
-        Book book = bookRepository.findById(bookId).orElse(null);
-        Publisher publisher = publisherRepository.findById(publisherId).orElse(null);
+        Book book = bookRepository.findById(bookId)
+                .orElseThrow(() -> new EntityNotFoundException("Book not found with id = " + bookId));
+        Publisher publisher = publisherRepository.findById(publisherId)
+                .orElseThrow(() -> new EntityNotFoundException("Publisher not found with id = " + publisherId));
         book.setPublisher(publisher);
         publisher.getBookList().add(book);
         return bookRepository.save(book);
     }
 
     public Book addRewardToBook (Integer rewardId, Integer bookId) {
-        Book book = bookRepository.findById(bookId).orElse(null);
-        Reward reward = rewardRepository.findById(rewardId).orElse(null);
+        Book book = bookRepository.findById(bookId)
+                .orElseThrow(() -> new EntityNotFoundException("Book not found with id = " + bookId));
+        Reward reward = rewardRepository.findById(rewardId)
+                .orElseThrow(() -> new EntityNotFoundException("Reward not found with id = " + rewardId));
         book.getRewards().add(reward);
+        reward.setBook(book);
         return bookRepository.save(book);
     }
 }

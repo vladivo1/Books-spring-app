@@ -62,7 +62,8 @@ public class RewardController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteReward(@PathVariable Integer id) {
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(rewardService.deleteReward(id));
+        rewardService.deleteReward(id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Reward with id " + id + "deleted");
 
     }
 

@@ -14,7 +14,7 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 public class ControllerAdvisor {
 
     @ExceptionHandler(EntityNotFoundException.class)
-    @ResponseStatus(NOT_FOUND)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
     public ErrorResponse handleNotFoundException(EntityNotFoundException notFoundException) {
         return ErrorResponse.builder()
                 .message(notFoundException.getMessage())
@@ -42,6 +42,4 @@ public class ControllerAdvisor {
                 .timestamp(now())
                 .build();
     }
-
-
 }
