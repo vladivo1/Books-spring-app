@@ -1,16 +1,18 @@
 package com.example.springbootapp.controller;
 
-
 import com.example.springbootapp.domain.Author;
 import com.example.springbootapp.domain.Book;
 import com.example.springbootapp.service.AuthorService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/api", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/api/authors", produces = MediaType.APPLICATION_JSON_VALUE)
 public class AuthorController {
 
     private final AuthorService authorService;
@@ -19,52 +21,48 @@ public class AuthorController {
 
     }
 
-    @PostMapping("/author")
-    @ResponseStatus(HttpStatus.CREATED)
-    public Author saveAuthor(@RequestBody Author author) {
-        return authorService.saveAuthor(author);
+    @PostMapping()
+    public ResponseEntity<Author> saveAuthor(@Valid @RequestBody Author author)  {
+        authorService.saveAuthor(author);
+        return ResponseEntity.status(HttpStatus.CREATED).body(author);
     }
 
-    @PostMapping("/authors")
-    @ResponseStatus(HttpStatus.CREATED)
-    public List<Author> saveAuthors (@RequestBody List<Author> authors) {
-        return authorService.saveAuthors(authors);
+    @PostMapping("/list")
+    public ResponseEntity<List<Author>> saveAuthors (@Valid @RequestBody List<Author> authors) {
+        authorService.saveAuthors(authors);
+        return ResponseEntity.status(HttpStatus.CREATED).body(authors);
     }
 
-    @PostMapping("/author/{id}/book")
-        @ResponseStatus(HttpStatus.CREATED)
-        public Author addBook (@PathVariable ("id") Integer id, @RequestBody Book book) {
-            return authorService.addBook(id,book);
+    @PostMapping("/{id}/book")
+        public ResponseEntity<Author> addBook (@PathVariable ("id") Integer id, @Valid @RequestBody Book book) {
+            Author author = authorService.addBook(id,book);
+            return ResponseEntity.status(HttpStatus.OK).body(author);
     }
 
-    @GetMapping("/authors")
-    @ResponseStatus(HttpStatus.OK)
-    public List <Author> getAllAuthors() {
-        return authorService.getAllAuthors();
+    @GetMapping
+    public ResponseEntity<List<Author>> getAllAuthors() {
+        return ResponseEntity.status(HttpStatus.OK).body(authorService.getAllAuthors());
     }
 
-    @GetMapping("/author/{id}")
-    @ResponseStatus(HttpStatus.OK)
-    public Author getAuthorById(@PathVariable Integer id) {
-      return authorService.getAuthorById(id);
-    }
-    @GetMapping("/author/birthday/{id}")
-    @ResponseStatus(HttpStatus.OK)
-    public String getAuthorBirthdayById(@PathVariable Integer id) {
-        return authorService.getAuthorAndDateOfBirthdayById(id);
+    @GetMapping("/{id}")
+    public ResponseEntity<Author> getAuthorById(@PathVariable Integer id) {
+      return ResponseEntity.status(HttpStatus.OK).body(authorService.getAuthorById(id));
     }
 
-    @PutMapping  ("/author/{id}")
-    @ResponseStatus(HttpStatus.OK)
-    public Author updateAuthor(@PathVariable("id") Integer id, @RequestBody Author author) {
-         return authorService.updateAuthor(id, author);
+    @GetMapping("/birthday/{id}")
+    public ResponseEntity<String> getAuthorBirthdayById(@PathVariable Integer id) {
+        return ResponseEntity.status(HttpStatus.OK).body(authorService.getAuthorAndDateOfBirthdayById(id));
     }
 
-    @DeleteMapping("/author/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public String deleteAuthor(@PathVariable Integer id) {
-        return authorService.deleteAuthor(id);
+    @PutMapping("/{id}")
+    public ResponseEntity<Author> updateAuthor(@PathVariable("id") Integer id, @Valid @RequestBody Author author) {
+         return ResponseEntity.status(HttpStatus.OK).body(authorService.updateAuthor(id, author));
+    }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteAuthor(@PathVariable Integer id) {
+        authorService.deleteAuthor(id);
+       return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Author with id " + id + " deleted");
 
     }
 

@@ -5,7 +5,9 @@ import com.example.springbootapp.domain.Book;
 import com.example.springbootapp.repository.AuthorRepository;
 import org.springframework.stereotype.Service;
 import javax.persistence.EntityNotFoundException;
+import javax.validation.ValidationException;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AuthorService {
@@ -17,12 +19,12 @@ public class AuthorService {
     }
 
 
-    public Author saveAuthor(Author author) {
-        return authorRepository.save(author);
+    public void saveAuthor(Author author)  {
+        authorRepository.save(author);
     }
 
-    public List<Author> saveAuthors(List<Author> authors) {
-        return authorRepository.saveAll(authors);
+    public void saveAuthors(List<Author> authors) {
+        authorRepository.saveAll(authors);
     }
 
     public List<Author> getAllAuthors() {
@@ -31,14 +33,15 @@ public class AuthorService {
 
     public Author addBook(Integer id, Book book) {
         Author author = authorRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Author with id " + id + "not found"));
+                .orElseThrow(() -> new EntityNotFoundException("Author with id " + id + " not found"));
         author.getBooks().add(book);
+        book.setAuthor(author);
         return authorRepository.save(author);
     }
 
     public Author getAuthorById(Integer id) {
         return authorRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Author with id " + id + "not found"));
+                .orElseThrow(() -> new EntityNotFoundException("Author with id " + id + " not found"));
     }
 
     public String getAuthorAndDateOfBirthdayById(Integer id) {
@@ -51,15 +54,15 @@ public class AuthorService {
                     entity.setFirstName(author.getFirstName());
                     entity.setLastName(author.getLastName());
                     entity.setBirthDate(author.getBirthDate());
+                    entity.setEmail(author.getEmail());
                     entity.setSex(author.getSex());
                     return authorRepository.save(entity);
                 })
                 .orElseThrow(() -> new EntityNotFoundException("Author not found with id = " + id));
     }
 
-     public String deleteAuthor(Integer id) {
-        authorRepository.deleteById(id);
-        return "Author with id + " + id + "was deleted";
-    }
+     public void deleteAuthor(Integer id) {
+          authorRepository.deleteById(id);
+     }
 
 }
